@@ -13,6 +13,7 @@ function App() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [notes, setNotes] = useState<Note[]>([]);
+  const [search, setSearch] = useState("");
   const [editingNote, setEditingNote] = useState<Note | null>(null);
   const handleApply = () => {
     if (input.trim() === "") return;
@@ -39,13 +40,23 @@ function App() {
   const deleteNote = (id: number) => {
     setNotes(notes.filter((note) => note.id !== id));
   };
+
+  const filteredNotes = notes.filter((note) =>
+    note.text.toLowerCase().includes(search.toLowerCase()),
+  );
   return (
-    <div>
+    <div className="app">
       <div className="head">
         <h3>TODO LIST</h3>
       </div>
       <div className="searchbox">
-        <input className="searchbar" type="text" placeholder="Search note..." />
+        <input
+          className="searchbar"
+          type="text"
+          placeholder="Search note..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <button className="filterbutton">All</button>
       </div>
       <div className="lists"></div>
@@ -53,7 +64,7 @@ function App() {
       <FaCirclePlus className="plusbutton" onClick={() => setOpen(true)} />
 
       <div className="lists">
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <div key={note.id} className="note-item">
             <input
               className="checkbox"
