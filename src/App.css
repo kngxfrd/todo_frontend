@@ -134,6 +134,7 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .checkbox{
@@ -150,8 +151,10 @@
 }
 
 .listbutton{
-width: 13px;
-height: 13px;
+width: 62px;
+height: 18px;
 color: #cdcdcd;
-right: 0px;
+margin-left: auto;
+display: flex;
+gap: 10px;
 }

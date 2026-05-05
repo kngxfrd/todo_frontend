@@ -8,16 +8,32 @@ function App() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [notes, setNotes] = useState([]);
-  const [checked, setChecked] = useState(false);
-  const addNote = () => {
+  const [editingNote, setEditingNote] = useState(null);
+  const deleteNote = (id) => {
+    setNotes(notes.filter((note) => note.id !== id));
+  };
+  const handleApply = () => {
     if (input.trim() === "") return;
-    const newNote = {
-      id: Date.now(),
-      text: input,
-      completed: false,
-    };
-    setNotes([...notes, newNote]);
+
+    if (editingNote) {
+      setNotes(
+        notes.map((note) =>
+          note.id === editingNote.id ? { ...note, text: input } : note,
+        ),
+      );
+    } else {
+      // ➕ ADD new note
+      const newNote = {
+        id: Date.now(),
+        text: input,
+        completed: false,
+      };
+      setNotes([...notes, newNote]);
+    }
+
+    // reset everything
     setInput("");
+    setEditingNote(null);
     setOpen(false);
   };
   return (
@@ -51,8 +67,16 @@ function App() {
               }
             />
             <span className={note.completed ? "done" : ""}>{note.text}</span>
-            <GoPencil className="listbutton" />
-            <TfiTrash className="listbutton" />
+            <div className="listbutton">
+              <GoPencil
+                onClick={() => {
+                  setEditingNote(note);
+                  setInput(note.text);
+                  setOpen(true);
+                }}
+              />
+              <TfiTrash onClick={() => deleteNote(note.id)} />
+            </div>
           </div>
         ))}
       </div>
@@ -72,7 +96,7 @@ function App() {
             <button className="cancelbutton " onClick={() => setOpen(false)}>
               Cancel
             </button>
-            <button className="applybutton" onClick={addNote}>
+            <button className="applybutton" onClick={handleApply}>
               Apply
             </button>
           </div>
