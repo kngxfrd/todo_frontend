@@ -1,8 +1,157 @@
-.header{
-  height: 5%;
-  border: 1, gray;
+.serchbox{
+  gap:16px ;
 }
 
-.text-entry{
-  border: 1, gray;
+.searchbar{
+  width: 595px;
+  height: 20px;
+  border: 1px solid #6c63ff;
+  gap: 436px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-radius: 5px;
+  color: #c3c1e5;
+}
+
+.filterbutton{
+  width: 85px;
+  height: 38px;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+  background-color: #6c63ff;
+  border: 0;
+  color: white;
+  margin-left: 16px;
+}
+
+.plusbutton{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  top: 493px;
+  left: 920px;
+  border: 0;
+  background-color: white;
+  color: #6c63ff;
+  position: fixed;
+}
+
+
+.modalbox {
+  position: fixed;     
+  top: 50%;            
+  left: 50%;           
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  border: 1px solid #6c63ff;
+  border-radius: 16px;
+  width: 500px;
+  height: 289px;
+  z-index: 1000;      
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(2px);         
+  z-index: 999;                         
+}
+
+.notebox{
+  width: 440px;
+  height: 38px;
+  top: 185px;
+  left: 480px;
+  border: 1px solid #6c63ff;
+  border-radius: 5px;
+  gap: 436px;;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left:16px ;
+}
+
+.cancelbutton{
+  width: 110px;
+  height: 38px;
+  border: 1px solid #6c63ff;
+  border-radius: 5px;
+  padding-top:10px ;
+  padding-right: 22px;
+  padding-bottom: 10px;
+  padding-left: 22px;
+  gap: 10px;
+  background-color: white;
+  color: #6c63ff;
+  margin-top: 120px;
+  margin-right: 240px;
+}
+
+.applybutton{
+  width: 110px;
+  height: 38px;
+  border: 1px solid #6c63ff;
+  border-radius: 5px;
+  padding-top:10px ;
+  padding-right: 22px;
+  padding-bottom: 10px;
+  padding-left: 22px;
+  gap: 10px;
+  background-color:#6c63ff ;
+  color: white;
+  margin-top: 120px;
+
+}
+
+.lists{
+  text-align: left;
+  width: 750px;
+  padding-top:15px ;
+  padding-left: 190px;
+  
+}
+
+.note-item{
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  width: 520px;
+  height: 43px;
+  color: black;
+  left: 0px;
+  border-bottom: 1px solid #6c63ff;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox{
+  width: 20px;
+  height: 20px;
+  border: 1px solid #6c63ff;
+  accent-color: #6c63ff;
+  top: 10px;
+}
+
+.done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.listbutton{
+width: 13px;
+height: 13px;
+color: #cdcdcd;
+right: 0px;
 }
