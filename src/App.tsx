@@ -5,13 +5,15 @@ import { GoPencil } from "react-icons/go";
 import { TfiTrash } from "react-icons/tfi";
 
 function App() {
+  type Note = {
+    id: number;
+    text: string;
+    completed: boolean;
+  };
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [notes, setNotes] = useState([]);
-  const [editingNote, setEditingNote] = useState(null);
-  const deleteNote = (id) => {
-    setNotes(notes.filter((note) => note.id !== id));
-  };
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [editingNote, setEditingNote] = useState<Note | null>(null);
   const handleApply = () => {
     if (input.trim() === "") return;
 
@@ -22,7 +24,6 @@ function App() {
         ),
       );
     } else {
-      // ➕ ADD new note
       const newNote = {
         id: Date.now(),
         text: input,
@@ -31,10 +32,12 @@ function App() {
       setNotes([...notes, newNote]);
     }
 
-    // reset everything
     setInput("");
     setEditingNote(null);
     setOpen(false);
+  };
+  const deleteNote = (id: number) => {
+    setNotes(notes.filter((note) => note.id !== id));
   };
   return (
     <div>
