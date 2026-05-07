@@ -126,7 +126,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="fixed bottom-6 sm:bottom-10 right-90 ml-auto">
+      <div className="flex justify-end bottom-10 mr-auto ">
         <FaCirclePlus size={40} color="#6c63ff" onClick={() => setOpen(true)} />
       </div>
 
