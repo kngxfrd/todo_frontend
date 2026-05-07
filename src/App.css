@@ -1,172 +1,170 @@
-.serchbox{
-  gap:16px ;
+/*.serchbox{
+gap:16px ;
 }
 
 .searchbar{
-  width: 595px;
-  height: 20px;
-  border: 1px solid #6c63ff;
-  gap: 436px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-right: 16px;
-  padding-left: 16px;
-  border-radius: 5px;
-  color: black;
-  
+width: 595px;
+height: 20px;
+border: 1px solid #6c63ff;
+gap: 436px;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-right: 16px;
+padding-left: 16px;
+border-radius: 5px;
+color: black;
+
 }
 
 .searchbar::placeholder{
-  color:#c3c1e5 ;
+color:#c3c1e5 ;
 }
 .searchbar:focus{
-   border: 1px solid #6c63ff;
-   outline: none;
+  border: 1px solid #6c63ff;
+  outline: none;
 }
 
 .filterbutton{
-  width: 85px;
-  height: 38px;
-  border-radius: 5px;
-  padding: 10px;
-  gap: 10px;
-  background-color: #6c63ff;
-  border: 0;
-  color: white;
-  margin-left: 16px;
+width: 85px;
+height: 38px;
+border-radius: 5px;
+margin-left: 16px;
+background-color: #6c63ff;
+border: 0;
+color: white;
 }
 
 .plusbutton{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  top: 493px;
-  left: 920px;
-  border: 0;
-  background-color: white;
-  color: #6c63ff;
-  position: fixed;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+top: 493px;
+left: 920px;
+border: 0;
+background-color: white;
+color: #6c63ff;
+position: fixed;
 }
 
 
 .modalbox {
-  position: fixed;     
-  top: 50%;            
-  left: 50%;           
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding-top: 8px;
-  padding-right: 16px;
-  padding-bottom: 8px;
-  padding-left: 16px;
-  border: 1px solid #6c63ff;
-  border-radius: 16px;
-  width: 500px;
-  height: 289px;
-  z-index: 1000;      
+position: fixed;     
+top: 50%;            
+left: 50%;           
+transform: translate(-50%, -50%);
+background-color: white;
+padding-top: 8px;
+padding-right: 16px;
+padding-bottom: 8px;
+padding-left: 16px;
+border: 1px solid #6c63ff;
+border-radius: 16px;
+width: 500px;
+height: 289px;
+z-index: 1000;      
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  backdrop-filter: blur(2px);         
-  z-index: 999;                         
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5); 
+backdrop-filter: blur(2px);         
+z-index: 999;                         
 }
 
 .notebox{
-  width: 440px;
-  height: 38px;
-  top: 185px;
-  left: 480px;
-  border: 1px solid #6c63ff;
-  border-radius: 5px;
-  gap: 436px;;
-  padding-top: 8px;
-  padding-right: 16px;
-  padding-bottom: 8px;
-  padding-left:16px ;
-  color: black;
+width: 440px;
+height: 38px;
+top: 185px;
+left: 480px;
+border: 1px solid #6c63ff;
+border-radius: 5px;
+gap: 436px;;
+padding-top: 8px;
+padding-right: 16px;
+padding-bottom: 8px;
+padding-left:16px ;
+color: black;
 }
 
 .notebox::placeholder{
-  color:#c3c1e5 ;
+color:#c3c1e5 ;
 }
 
 .notebox:focus{
-   border: 1px solid #6c63ff;
-   outline: none;
+  border: 1px solid #6c63ff;
+  outline: none;
 }
 
 .cancelbutton{
-  width: 110px;
-  height: 38px;
-  border: 1px solid #6c63ff;
-  border-radius: 5px;
-  padding-top:10px ;
-  padding-right: 22px;
-  padding-bottom: 10px;
-  padding-left: 22px;
-  gap: 10px;
-  background-color: white;
-  color: #6c63ff;
-  margin-top: 120px;
-  margin-right: 240px;
+width: 110px;
+height: 38px;
+border: 1px solid #6c63ff;
+border-radius: 5px;
+padding-top:10px ;
+padding-right: 22px;
+padding-bottom: 10px;
+padding-left: 22px;
+gap: 10px;
+background-color: white;
+color: #6c63ff;
+margin-top: 120px;
+margin-right: 240px;
 }
 
 .applybutton{
-  width: 110px;
-  height: 38px;
-  border: 1px solid #6c63ff;
-  border-radius: 5px;
-  padding-top:10px ;
-  padding-right: 22px;
-  padding-bottom: 10px;
-  padding-left: 22px;
-  gap: 10px;
-  background-color:#6c63ff ;
-  color: white;
-  margin-top: 120px;
+width: 110px;
+height: 38px;
+border: 1px solid #6c63ff;
+border-radius: 5px;
+padding-top:10px ;
+padding-right: 22px;
+padding-bottom: 10px;
+padding-left: 22px;
+gap: 10px;
+background-color:#6c63ff ;
+color: white;
+margin-top: 120px;
 
 }
 
 .lists{
-  text-align: left;
-  width: 750px;
-  padding-top:15px ;
-  padding-left: 190px;
-  
+text-align: left;
+width: 750px;
+padding-top:15px ;
+padding-left: 190px;
+
 }
 
 .note-item{
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  width: 520px;
-  height: 43px;
-  color: black;
-  left: 0px;
-  border-bottom: 1px solid #6c63ff;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+padding-top: 20px;
+padding-left: 20px;
+padding-bottom: 20px;
+width: 520px;
+height: 43px;
+color: black;
+left: 0px;
+border-bottom: 1px solid #6c63ff;
+margin: 0 auto;
+display: flex;
+align-items: center;
+gap: 10px;
 }
 
 .checkbox{
-  width: 20px;
-  height: 20px;
-  border: 1px solid #6c63ff;
-  accent-color: #6c63ff;
-  top: 10px;
+width: 20px;
+height: 20px;
+border: 1px solid #6c63ff;
+accent-color: #6c63ff;
+top: 10px;
 }
 
 .done {
-  text-decoration: line-through;
-  color: gray;
+text-decoration: line-through;
+color: gray;
 }
 
 .listbutton{
@@ -177,3 +175,14 @@ margin-left: auto;
 display: flex;
 gap: 10px;
 }
+
+.empty-state {
+text-align: center;
+margin-top: 50px;
+}
+
+.emptyimg{
+width: 221px;
+height: 174px;
+} */
+ 
