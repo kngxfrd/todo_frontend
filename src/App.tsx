@@ -69,7 +69,7 @@ function App() {
         <div className="w-md  text-center  ">
           {notes.length === 0 ? (
             <div>
-              <div className="flex item-center pt-20 justify-center shrink:0 sm:w-auto sm:h-auto ">
+              <div className="flex item-center pt-20 justify-center">
                 <img
                   src="src/assets/emptyimg.png"
                   alt="No tasks"
@@ -126,7 +126,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="fixed bottom-6 sm:bottom-10 right-5 ml-auto">
+      <div className="fixed bottom-6 sm:bottom-10 right-90 ml-auto">
         <FaCirclePlus size={40} color="#6c63ff" onClick={() => setOpen(true)} />
       </div>
 
