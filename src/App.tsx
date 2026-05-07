@@ -51,14 +51,14 @@ function App() {
       </div>
       <div className=" flex item-center justify-center gap-4 pt-5">
         <input
-          className=" border rounded-sm sm:w-sm h-8 pl-4 border-[#6c63ff] focus:outline-0"
+          className=" border rounded-sm w-sm text-sm h-8 pl-3 border-[#6c63ff] focus:outline-0 font-inter"
           type="text"
           placeholder="Search note..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <button className=" text-md">
-          <div className="border -mt-1 p-2 px-2 py-0.5 flex gap-2 mt-0.5 bg-[#6c63ff] text-white rounded-sm">
+        <button className=" text-sm">
+          <div className="h-7 -mt-1 p-2 px-2 py-0.5 flex gap-2 mt-0.5 bg-[#6c63ff] text-white rounded-sm font-kanit">
             All
             <IoIosArrowDown className="mt-1" size={18} />
           </div>
@@ -104,7 +104,9 @@ function App() {
                     />
                     <span
                       className={
-                        note.completed ? "line-through text-gray pl-5" : "pl-5"
+                        note.completed
+                          ? "line-through text-gray pl-5"
+                          : "pl-5 font-kanit"
                       }
                     >
                       {note.text}
@@ -126,7 +128,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="flex-col justify-items-end bottom-10 mt-40 ">
+      <div className="fixed bottom-10 right-20">
         <FaCirclePlus size={40} color="#6c63ff" onClick={() => setOpen(true)} />
       </div>
 
@@ -139,7 +141,7 @@ function App() {
               <input
                 autoFocus
                 type="text"
-                className="border border-[#6c63ff] p-2 w-full rounded focus:outline-0"
+                className="border border-[#6c63ff] p-2 w-full rounded focus:outline-0 font-inter text-sm text-black"
                 placeholder="Input your note"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -147,7 +149,7 @@ function App() {
 
               <div className="flex justify-end gap-35">
                 <button
-                  className="bg-white px-3 py-1 rounded border border-[#6c63ff] text-[#6c63ff]"
+                  className="bg-white px-3 py-1 rounded-md border border-[#6c63ff] text-[#6c63ff]"
                   onClick={() => {
                     setOpen(false);
                     setInput("");
@@ -158,7 +160,7 @@ function App() {
                 </button>
 
                 <button
-                  className="bg-[#6c63ff] text-white px-3 py-1 rounded"
+                  className="bg-[#6c63ff] text-white px-3 py-1 rounded-md font-inter"
                   onClick={handleApply}
                 >
                   Apply
