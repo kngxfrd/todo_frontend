@@ -3,7 +3,7 @@ function Signup() {
   const navigate = useNavigate();
   return (
     <div className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div className="w-70 h-120 border border-[#6c63ff] rounded-lg pt-6">
+      <div className="text-center w-70 h-120 border border-[#6c63ff] rounded-lg pt-6">
         <h2>SIGN UP</h2>
         <div className="flex flex-col gap-3">
           <label htmlFor="" className="text-left pl-6 text-sm">
@@ -51,7 +51,7 @@ function Signup() {
         </div>
         <div className="text-xs pt-5 flex flex-row justify-center gap-1">
           <p>Already have an account?</p>
-          <button onClick={() => navigate("/")} className="text-black">
+          <button onClick={() => navigate("/")}>
             <u>Sign in</u>
           </button>
         </div>

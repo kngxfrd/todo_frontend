@@ -62,8 +62,8 @@ function Hompage() {
   );
   return (
     <>
-      <div className="w-screen h-screen">
-        <div className="text-md text-black font-bold">
+      <div className="">
+        <div className="flex justify-center items-center text-md text-black font-bold">
           <h3>TODO LIST</h3>
         </div>
         <div className=" flex item-center justify-center gap-4 pt-5">
@@ -106,7 +106,7 @@ function Hompage() {
                   >
                     <div className="flex items-center">
                       <input
-                        className="size-6 accent-[#6c63ff] border border-[#6c63ff]"
+                        className="size-6 accent-[#6c63ff]  border-[#6c63ff]"
                         type="checkbox"
                         checked={note.completed}
                         onChange={() =>
@@ -130,7 +130,7 @@ function Hompage() {
                           >
                             <div className="flex  pb-1">{note.text}</div>
                           </span>
-                          <p className="text-[10px] text-gray-300 pl-3 ">
+                          <p className="text-[10px] text-gray-300 pl-3 pt-1">
                             {note.date}
                           </p>
                         </div>

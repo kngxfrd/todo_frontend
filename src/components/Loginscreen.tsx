@@ -4,7 +4,7 @@ function Loginscreen() {
   const navigate = useNavigate();
   return (
     <div className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div className="w-70 h-90 border border-[#6c63ff] rounded-lg pt-6">
+      <div className="text-center w-70 h-90 border border-[#6c63ff] rounded-lg pt-6">
         <h2>LOGIN</h2>
         <div className="flex flex-col gap-3">
           <label htmlFor="" className="text-left pl-6 text-sm">
