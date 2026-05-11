@@ -73,7 +73,7 @@ function Hompage() {
         </div>
 
         <div className="flex item-center justify-center pt-2">
-          <div className="w-md  text-center  ">
+          <div className="w-md  text-center">
             {notes.length === 0 ? (
               <div>
                 <div className="flex items-center pt-20 justify-center">
@@ -109,7 +109,7 @@ function Hompage() {
                           )
                         }
                       />
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-1">
                         <span
                           className={
                             note.completed
@@ -120,7 +120,7 @@ function Hompage() {
                           {note.text}
                         </span>
                         {note.description && (
-                          <p className="text-xs text-gray-400 pr-5">
+                          <p className="text-xs text-gray-400 pl-8">
                             {note.description}
                           </p>
                         )}
