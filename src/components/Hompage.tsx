@@ -8,10 +8,12 @@ function Hompage() {
   type Note = {
     id: number;
     text: string;
+    description: string;
     completed: boolean;
   };
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [description, setDescription] = useState("");
   const [notes, setNotes] = useState<Note[]>([]);
   const [search, setSearch] = useState("");
   const [editingNote, setEditingNote] = useState<Note | null>(null);
@@ -21,19 +23,23 @@ function Hompage() {
     if (editingNote) {
       setNotes(
         notes.map((note) =>
-          note.id === editingNote.id ? { ...note, text: input } : note,
+          note.id === editingNote.id
+            ? { ...note, text: input, description }
+            : note,
         ),
       );
     } else {
       const newNote = {
         id: Date.now(),
         text: input,
+        description,
         completed: false,
       };
       setNotes([...notes, newNote]);
     }
 
     setInput("");
+    setDescription("");
     setEditingNote(null);
     setOpen(false);
   };
@@ -103,21 +109,29 @@ function Hompage() {
                           )
                         }
                       />
-                      <span
-                        className={
-                          note.completed
-                            ? "line-through text-gray pl-5"
-                            : "pl-5 font-kanit"
-                        }
-                      >
-                        {note.text}
-                      </span>
+                      <div className="flex flex-col gap-2">
+                        <span
+                          className={
+                            note.completed
+                              ? "line-through text-gray pl-5"
+                              : "pl-5 font-kanit"
+                          }
+                        >
+                          {note.text}
+                        </span>
+                        {note.description && (
+                          <p className="text-xs text-gray-400 pr-5">
+                            {note.description}
+                          </p>
+                        )}
+                      </div>
                     </div>
                     <div className="flex gap-3">
                       <GoPencil
                         onClick={() => {
                           setEditingNote(note);
                           setInput(note.text);
+                          setDescription(note.description);
                           setOpen(true);
                         }}
                       />
@@ -140,7 +154,7 @@ function Hompage() {
         {open && (
           <>
             <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-              <div className="bg-white border border-[#6c63ff] rounded-md w-80 p-4 flex flex-col justify-between h-56">
+              <div className="bg-white border border-[#6c63ff] rounded-md w-80 p-4 flex flex-col justify-between h-65">
                 <h3 className="text-lg font-semibold">NEW NOTE</h3>
 
                 <input
@@ -151,6 +165,13 @@ function Hompage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                 />
+                <textarea
+                  className="border border-[#6c63ff] p-2 w-full rounded focus:outline-0 font-inter text-sm text-black"
+                  placeholder="Add a description"
+                  rows={4}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
 
                 <div className="flex justify-end gap-35">
                   <button
@@ -158,6 +179,7 @@ function Hompage() {
                     onClick={() => {
                       setOpen(false);
                       setInput("");
+                      setDescription("");
                       setEditingNote(null);
                     }}
                   >
