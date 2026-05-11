@@ -9,6 +9,7 @@ function Hompage() {
     id: number;
     text: string;
     description: string;
+    date: string;
     completed: boolean;
   };
   const [open, setOpen] = useState(false);
@@ -20,6 +21,14 @@ function Hompage() {
   const handleApply = () => {
     if (input.trim() === "") return;
 
+    const now = new Date();
+    const formattedDate = now.toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     if (editingNote) {
       setNotes(
         notes.map((note) =>
@@ -33,6 +42,7 @@ function Hompage() {
         id: Date.now(),
         text: input,
         description,
+        date: formattedDate,
         completed: false,
       };
       setNotes([...notes, newNote]);
@@ -89,10 +99,10 @@ function Hompage() {
               <p>No matching tasks found</p>
             ) : (
               filteredNotes.map((note) => (
-                <div className="w-md text-center">
+                <div className="w-md text-left">
                   <div
                     key={note.id}
-                    className="flex justify-between border-b border-[#6c63ff] py-6"
+                    className="flex justify-between border-b border-[#6c63ff] py-4"
                   >
                     <div className="flex items-center">
                       <input
@@ -109,24 +119,36 @@ function Hompage() {
                           )
                         }
                       />
-                      <div className="flex flex-col gap-1">
-                        <span
-                          className={
-                            note.completed
-                              ? "line-through text-gray pl-5"
-                              : "pl-5 font-kanit"
-                          }
-                        >
-                          {note.text}
-                        </span>
+                      <div className=" ">
+                        <div className="flex">
+                          <span
+                            className={
+                              note.completed
+                                ? "line-through text-gray pl-5"
+                                : "pl-5 font-kanit"
+                            }
+                          >
+                            <div className="flex  pb-1">{note.text}</div>
+                          </span>
+                          <p className="text-[10px] text-gray-300 pl-3 ">
+                            {note.date}
+                          </p>
+                        </div>
+
                         {note.description && (
-                          <p className="text-xs text-gray-400 pl-8">
+                          <p
+                            className={
+                              note.completed
+                                ? "line-through text-xs text-gray-400 pl-5"
+                                : "text-xs text-gray-400 pl-5"
+                            }
+                          >
                             {note.description}
                           </p>
                         )}
                       </div>
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 pt-3">
                       <GoPencil
                         onClick={() => {
                           setEditingNote(note);
