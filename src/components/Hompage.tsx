@@ -1,70 +1,92 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCirclePlus } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
 import { TfiTrash } from "react-icons/tfi";
 import { IoIosArrowDown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import type { Task } from "../services/auth";
+import {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+} from "../services/taskService";
 
 function Hompage() {
-  type Note = {
-    id: number;
-    text: string;
-    description: string;
-    date: string;
-    completed: boolean;
-  };
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  }
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+
   const [description, setDescription] = useState("");
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Task[]>([]);
   const [search, setSearch] = useState("");
-  const [editingNote, setEditingNote] = useState<Note | null>(null);
-  const handleApply = () => {
+  const [editingNote, setEditingNote] = useState<Task | null>(null);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+      return;
+    }
+    fetchTasks();
+  }, []);
+
+  async function fetchTasks() {
+    const data = await getTasks();
+    setNotes(data);
+  }
+  const handleApply = async () => {
     if (input.trim() === "") return;
 
-    const now = new Date();
-    const formattedDate = now.toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
     if (editingNote) {
+      const updated = await updateTask(editingNote.id, {
+        title: input,
+        description,
+      });
       setNotes(
-        notes.map((note) =>
-          note.id === editingNote.id
-            ? { ...note, text: input, description }
-            : note,
-        ),
+        notes.map((note) => (note.id === editingNote.id ? updated : note)),
       );
     } else {
-      const newNote = {
-        id: Date.now(),
-        text: input,
+      const newTask = await createTask({
+        title: input,
         description,
-        date: formattedDate,
-        completed: false,
-      };
-      setNotes([...notes, newNote]);
+        created_at: Date.now(),
+      });
+      setNotes([...notes, newTask]);
     }
-
     setInput("");
     setDescription("");
     setEditingNote(null);
     setOpen(false);
   };
-  const deleteNote = (id: number) => {
+  const deleteNote = async (id: number) => {
+    await deleteTask(id);
     setNotes(notes.filter((note) => note.id !== id));
   };
 
   const filteredNotes = notes.filter((note) =>
-    note.text.toLowerCase().includes(search.toLowerCase()),
+    note.title.toLowerCase().includes(search.toLowerCase()),
   );
   return (
     <>
       <div className="">
-        <div className="flex justify-center items-center text-md text-black font-bold text-[24px]">
-          <h1>TODO LIST</h1>
+        <div className="relative flex items-center justify-center py-4">
+          <div className=" text-md text-black font-bold text-[24px]">
+            <h1>TODO LIST</h1>
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              onClick={handleLogout}
+              className=" absolute right-20 text-sm border border-[#6c63ff] text-[#6c63ff] px-4 py-1 rounded-md"
+            >
+              Logout
+            </button>
+          </div>
         </div>
         <div className=" flex item-center justify-center gap-4 pt-5">
           <input
@@ -109,15 +131,16 @@ function Hompage() {
                         className="size-6 accent-[#6c63ff]  border-[#6c63ff]"
                         type="checkbox"
                         checked={note.completed}
-                        onChange={() =>
+                        onChange={async () => {
+                          const updated = await updateTask(note.id, {
+                            completed: !note.completed,
+                          });
                           setNotes(
                             notes.map((item) =>
-                              item.id === note.id
-                                ? { ...item, completed: !item.completed }
-                                : item,
+                              item.id === note.id ? updated : item,
                             ),
-                          )
-                        }
+                          );
+                        }}
                       />
                       <div className=" ">
                         <div className="flex">
@@ -128,10 +151,10 @@ function Hompage() {
                                 : "pl-5 font-kanit"
                             }
                           >
-                            <div className="flex  pb-1">{note.text}</div>
+                            <div className="flex  pb-1">{note.title}</div>
                           </span>
                           <p className="text-[10px] text-gray-300 pl-3 pt-1.5">
-                            {note.date}
+                            {note.created_at}
                           </p>
                         </div>
 
@@ -152,7 +175,7 @@ function Hompage() {
                       <GoPencil
                         onClick={() => {
                           setEditingNote(note);
-                          setInput(note.text);
+                          setInput(note.title);
                           setDescription(note.description);
                           setOpen(true);
                         }}
