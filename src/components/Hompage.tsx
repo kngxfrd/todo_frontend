@@ -63,8 +63,8 @@ function Hompage() {
   return (
     <>
       <div className="">
-        <div className="flex justify-center items-center text-md text-black font-bold">
-          <h3>TODO LIST</h3>
+        <div className="flex justify-center items-center text-md text-black font-bold text-[24px]">
+          <h1>TODO LIST</h1>
         </div>
         <div className=" flex item-center justify-center gap-4 pt-5">
           <input
@@ -93,7 +93,7 @@ function Hompage() {
                     className="emptyimg"
                   />
                 </div>
-                <h3>Empty...</h3>
+                <h1 className="text-[20px] text-gray-500">Empty...</h1>
               </div>
             ) : filteredNotes.length === 0 ? (
               <p>No matching tasks found</p>
@@ -130,7 +130,7 @@ function Hompage() {
                           >
                             <div className="flex  pb-1">{note.text}</div>
                           </span>
-                          <p className="text-[10px] text-gray-300 pl-3 pt-1">
+                          <p className="text-[10px] text-gray-300 pl-3 pt-1.5">
                             {note.date}
                           </p>
                         </div>

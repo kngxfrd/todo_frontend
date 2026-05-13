@@ -7,5 +7,15 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react()],
+     server: {
+    proxy: {
+      "/api": {
+        target: "https://todo-api-ztc2.onrender.com",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
+
   
-})
+});
