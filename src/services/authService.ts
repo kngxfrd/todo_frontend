@@ -30,8 +30,8 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
    const data = await safeJson(response);
   console.log("Register response:", data);  
   if (data?.access) {
-    localStorage.setItem("token", data.tokens.access);
-    localStorage.setItem("refresh", data.tokens.refresh);
+    localStorage.setItem("token", data.access);
+    localStorage.setItem("refresh", data.refresh);
   }
 
   return data;
