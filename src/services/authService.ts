@@ -27,8 +27,13 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
     throw new Error("Registration failed");
   }
 
-   const data: AuthResponse = await safeJson(response);  
-  localStorage.setItem("token", data.tokens.access);
+   const data = await safeJson(response);
+  console.log("Register response:", data);  
+  if (data?.tokens?.access) {
+    localStorage.setItem("token", data.tokens.access);
+    localStorage.setItem("refresh", data.tokens.refresh);
+  }
+
   return data;
 
   
