@@ -8,15 +8,21 @@ function getHeaders() {
     "Content-Type": "application/json",
     Authorization: `Token ${token}`,
 }}
-
+async function safeJson(response: Response) {
+  const text = await response.text();
+  return text ? JSON.parse(text) : {};
+}
 
 export async function getTasks(): Promise<{ message: string; tasks: Task[] }> {
   const response = await fetch(`${BASE_URL}tasks/`, {
     headers: getHeaders(),
   });
-  if (!response.ok) throw new Error("Failed to fetch tasks");
-  const data = await response.json();
-  return data
+  if (!response.ok) {
+    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    throw new Error(error.message || "failed to fetch tasks");
+  }
+
+  return safeJson(response);  // 👈 here too
 }
 
 export async function createTask(payload: TaskPayload): Promise<Task>{
@@ -25,8 +31,12 @@ export async function createTask(payload: TaskPayload): Promise<Task>{
     headers: getHeaders(),
     body: JSON.stringify(payload)
   })
-  if(!response.ok) throw new Error ("Failed to create task"); 
-  return response.json();  
+  if (!response.ok) {
+    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    throw new Error(error.message || "failed to create tasks");
+  }
+
+  return safeJson(response);  // 👈 here too 
 
 }
 
@@ -36,8 +46,12 @@ export async function updateTask(id: number, payload: Partial<TaskPayload>): Pro
     headers: getHeaders(),
     body: JSON.stringify(payload),
   });
-  if (!response.ok) throw new Error("Failed to update task");
-  return response.json();
+  if (!response.ok) {
+    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    throw new Error(error.message || "failed to update tasks");
+  }
+
+  return safeJson(response);  // 👈 here too
 }
 
 export async function deleteTask(id: number): Promise<void> {
@@ -45,5 +59,10 @@ export async function deleteTask(id: number): Promise<void> {
     method: "DELETE",
     headers: getHeaders(),
   });
-  if (!response.ok) throw new Error("Failed to delete task");
+if (!response.ok) {
+    const error = await safeJson(response);  
+    throw new Error(error.message || "failed to delete tasks");
+  }
+
+  return safeJson(response);  // 👈 here too
 }
