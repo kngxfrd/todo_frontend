@@ -5,6 +5,7 @@ import { TfiTrash } from "react-icons/tfi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import type { Task } from "../services/auth";
+import DeleteModal from "./deleteModal";
 import {
   getTasks,
   createTask,
@@ -18,6 +19,7 @@ function Hompage() {
     localStorage.removeItem("user");
     navigate("/");
   }
+  const [deleteId, setDeleteId] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
@@ -64,9 +66,11 @@ function Hompage() {
     setEditingNote(null);
     setOpen(false);
   };
-  const deleteNote = async (id: number) => {
-    await deleteTask(id);
-    setNotes(notes.filter((note) => note.id !== id));
+  const deleteNote = async () => {
+    if (deleteId === null) return;
+    await deleteTask(deleteId);
+    setNotes(notes.filter((note) => note.id !== delete));
+    setDeleteId(null);
   };
 
   function formatDate(dateString: string) {
@@ -189,7 +193,7 @@ function Hompage() {
                           setOpen(true);
                         }}
                       />
-                      <TfiTrash onClick={() => deleteNote(note.id)} />
+                      <TfiTrash onClick={() => setDeleteId(note.id)} />
                     </div>
                   </div>
                 </div>
@@ -205,6 +209,13 @@ function Hompage() {
             onClick={() => setOpen(true)}
           />
         </div>
+
+        {deleteId !== null && (
+          <DeleteModal
+            onCancel={() => setDeleteId(null)}
+            onConfirm={deleteNote}
+          />
+        )}
 
         {open && (
           <>
