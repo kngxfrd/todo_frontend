@@ -6,7 +6,7 @@ function getHeaders() {
   const token = localStorage.getItem("token");
   return {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`, 
+    Authorization: `Token ${token}`,
 }}
 async function safeJson(response: Response) {
   const text = await response.text();
@@ -60,7 +60,7 @@ export async function deleteTask(id: number): Promise<void> {
     headers: getHeaders(),
   });
 if (!response.ok) {
-    const error = await safeJson(response);  
+    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
     throw new Error(error.message || "failed to delete tasks");
   }
 
