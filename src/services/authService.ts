@@ -28,16 +28,20 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   }
 
    const data = await safeJson(response);
-  console.log("Register response:", data);  
-  if (data?.access) {
+    console.log("Register response:", JSON.stringify(data));  
+ const token = data?.access || data?.tokens?.access || data?.token;
+  const refresh = data?.refresh || data?.tokens?.refresh;
+
+  if (token) {
     localStorage.clear();
-    localStorage.setItem("token", data.access);
-    localStorage.setItem("refresh", data.refresh);
+    localStorage.setItem("token", token);
+    if (refresh) localStorage.setItem("refresh", refresh);
+    console.log("Saved token:", localStorage.getItem("token"));  
+  } else {
+    console.log("No token found in response!"); 
   }
 
   return data;
-
-  
 }
 
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
@@ -61,8 +65,18 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   }
 
   
-  const data: AuthResponse = await safeJson(response);  
-  localStorage.clear();
-  localStorage.setItem("token", data.token);
+   const data = await safeJson(response);
+  console.log("Login response:", JSON.stringify(data)); 
+
+  const token = data?.tokens?.access || data?.access || data?.token;
+  const refresh = data?.tokens?.refresh || data?.refresh;
+
+  if (token) {
+    localStorage.clear();
+    localStorage.setItem("token", token);
+    if (refresh) localStorage.setItem("refresh", refresh);
+    console.log("Saved token:", localStorage.getItem("token")); 
+  }
+
   return data;
 }

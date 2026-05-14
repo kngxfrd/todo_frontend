@@ -18,11 +18,11 @@ export async function getTasks(): Promise<{ message: string; tasks: Task[] }> {
     headers: getHeaders(),
   });
   if (!response.ok) {
-    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    const error = await safeJson(response); 
     throw new Error(error.message || "failed to fetch tasks");
   }
 
-  return safeJson(response);  // 👈 here too
+  return safeJson(response);  
 }
 
 export async function createTask(payload: TaskPayload): Promise<Task>{
