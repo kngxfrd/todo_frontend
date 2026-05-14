@@ -15,8 +15,7 @@ import DeleteModal from "./DeleteModal";
 
 function Hompage() {
   function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+   localStorage.clear(); 
     navigate("/");
   }
   const [deleteId, setDeleteId] = useState<number | null>(null);
@@ -39,6 +38,7 @@ function Hompage() {
   }, []);
 
   async function fetchTasks() {
+      console.log("Fetching with token:", localStorage.getItem("token"));
     const data = await getTasks();
     setNotes(data.tasks);
     setLoading(false);
