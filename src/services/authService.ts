@@ -44,22 +44,6 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   return data;
 }
 
-export async function refreshToken(): Promise<void> {
-  const refresh = localStorage.getItem("refresh");
-  if (!refresh) throw new Error("No refresh token");
-
-  const response = await fetch(`${BASE_URL}auth/token/refresh/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ refresh }),
-  });
-
-  const data = await safeJson(response);
-  if (!response.ok) throw new Error("Refresh failed");
-
-  localStorage.setItem("token", data.access);  // 👈 save new access token
-}
-
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   const response = await fetch(`${BASE_URL}auth/login/`, {
     method: "POST",
@@ -82,7 +66,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
 
   
    const data = await safeJson(response);
-  console.log("Login response:", JSON.stringify(data)); 
+  console.log("Login response:", JSON.stringify(data));  // 👈 full log
 
   const token = data?.tokens?.access || data?.access || data?.token;
   const refresh = data?.tokens?.refresh || data?.refresh;
@@ -91,7 +75,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     localStorage.clear();
     localStorage.setItem("token", token);
     if (refresh) localStorage.setItem("refresh", refresh);
-    console.log("Saved token:", localStorage.getItem("token")); 
+    console.log("Saved token:", localStorage.getItem("token"));  // 👈 verify
   }
 
   return data;
