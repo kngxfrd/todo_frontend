@@ -33,7 +33,6 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     body: JSON.stringify(payload),
   });
 
-  
   if (!response.ok) {
     const error = await safeJson(response);
 
@@ -45,8 +44,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     throw new Error("Login failed");
   }
 
-  const data = await safeJson(response);
-  localStorage.setItem("token", data.tokens);
-  localStorage.setItem("user", JSON.stringify(data.user)); 
+  const data: AuthResponse = await safeJson(response); 
+  localStorage.setItem("token", data.tokens.access);
   return data;
 }
