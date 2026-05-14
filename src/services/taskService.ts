@@ -14,7 +14,7 @@ async function safeJson(response: Response) {
 }
 
 export async function getTasks(): Promise<{ message: string; tasks: Task[] }> {
-  const response = await fetch(`${BASE_URL}tasks/`, {
+  const response = await fetch(`${BASE_URL}/tasks/`, {
     headers: getHeaders(),
   });
   if (!response.ok) {

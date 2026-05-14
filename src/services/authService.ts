@@ -8,7 +8,7 @@ async function safeJson(response: Response) {
 }
 
 export async function registerUser(payload: RegisterPayload): Promise<AuthResponse> {
-  const response = await fetch(`${BASE_URL}auth/register/`, {
+  const response = await fetch(`${BASE_URL}/auth/register/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
 }
 
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
-  const response = await fetch(`${BASE_URL}auth/login/`, {
+  const response = await fetch(`${BASE_URL}/auth/login/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
