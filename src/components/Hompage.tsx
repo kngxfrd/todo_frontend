@@ -5,13 +5,13 @@ import { TfiTrash } from "react-icons/tfi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import type { Task } from "../services/auth";
-import DeleteModal from "./deleteModal";
 import {
   getTasks,
   createTask,
   updateTask,
   deleteTask,
 } from "../services/taskService";
+import DeleteModal from "./DeleteModal";
 
 function Hompage() {
   function handleLogout() {
