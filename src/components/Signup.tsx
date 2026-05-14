@@ -27,7 +27,7 @@ function Signup() {
 
     try {
       const data = await registerUser(form);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.tokens.access);
       setSuccessMessage(
         `Account created! Welcome, ${data.user?.name ?? "there"}`,
       );
