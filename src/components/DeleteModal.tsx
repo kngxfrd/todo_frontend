@@ -1,5 +1,4 @@
 interface Props {
-  title: string;
   onConfirm: () => void;
   onCancel: () => void;
 }

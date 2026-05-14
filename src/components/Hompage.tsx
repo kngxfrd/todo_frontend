@@ -69,7 +69,7 @@ function Hompage() {
   const deleteNote = async () => {
     if (deleteId === null) return;
     await deleteTask(deleteId);
-    setNotes(notes.filter((note) => note.id !== delete));
+    setNotes(notes.filter((note) => note.id !== deleteId));
     setDeleteId(null);
   };
 
