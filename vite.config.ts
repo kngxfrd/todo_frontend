@@ -9,11 +9,11 @@ export default defineConfig({
     react()],
     publicDir: "public",
      server: {
-    proxy: {
+     proxy: {
       "/api": {
         target: "https://todo-api-ztc2.onrender.com",
         changeOrigin: true,
-        secure: true,
+        secure: false,
       },
     },
   },
