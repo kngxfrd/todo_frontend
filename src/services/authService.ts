@@ -18,10 +18,16 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
 
   if (!response.ok) {
     const error = await safeJson(response);
-    throw new Error(error.message || "Registration failed");
+
+  
+    if (error.detail) throw new Error(error.detail);
+    const firstKey = Object.keys(error)[0];
+    if (firstKey) throw new Error(`${firstKey}: ${error[firstKey][0]}`);
+
+    throw new Error("Registration failed");
   }
 
-  return safeJson(response);  // 👈 here too
+  return safeJson(response);
 }
 
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
@@ -34,7 +40,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   });
 
   if (!response.ok) {
-    const error = await safeJson(response);  // 👈 here too
+    const error = await safeJson(response);  
 
     if (error.detail) throw new Error(error.detail);
 
@@ -44,7 +50,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     throw new Error("Login failed");
   }
 
-  const data: AuthResponse = await safeJson(response);  // 👈 and here
+  const data: AuthResponse = await safeJson(response);  
   localStorage.setItem("token", data.tokens.access);
   return data;
 }
