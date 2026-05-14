@@ -6,7 +6,7 @@ function getHeaders() {
   const token = localStorage.getItem("token");
   return {
     "Content-Type": "application/json",
-    Authorization: `Token ${token}`,
+    Authorization: `Bearer ${token}`,
 }}
 async function safeJson(response: Response) {
   const text = await response.text();
