@@ -59,6 +59,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     throw new Error("Login failed");
   }
 
+  
   const data: AuthResponse = await safeJson(response);  
   localStorage.setItem("token", data.tokens.access);
   return data;
