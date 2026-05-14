@@ -44,7 +44,14 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     throw new Error("Login failed");
   }
 
-  const data: AuthResponse = await safeJson(response);  // 👈 and here
-  localStorage.setItem("token", data.tokens.access);
-  return data;
+  const data = await safeJson(response);
+console.log("data on render:", JSON.stringify(data));
+
+if (!data?.tokens?.access) {
+  throw new Error("No token in response — possible CORS issue");
+}
+
+localStorage.setItem("token", data.tokens.access);
+localStorage.setItem("refresh", data.tokens.refresh);
+return data;
 }
