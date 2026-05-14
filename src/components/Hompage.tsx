@@ -20,7 +20,7 @@ function Hompage() {
   }
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-
+  const [loading, setLoading] = useState(true);
   const [description, setDescription] = useState("");
   const [notes, setNotes] = useState<Task[]>([]);
   const [search, setSearch] = useState("");
@@ -38,7 +38,8 @@ function Hompage() {
 
   async function fetchTasks() {
     const data = await getTasks();
-    setNotes(data);
+    setNotes(data.tasks);
+    setLoading(false);
   }
   const handleApply = async () => {
     if (input.trim() === "") return;
@@ -55,7 +56,6 @@ function Hompage() {
       const newTask = await createTask({
         title: input,
         description,
-        created_at: Date.now(),
       });
       setNotes([...notes, newTask]);
     }
@@ -68,6 +68,13 @@ function Hompage() {
     await deleteTask(id);
     setNotes(notes.filter((note) => note.id !== id));
   };
+
+  function formatDate(dateString: string) {
+    return new Intl.DateTimeFormat("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    }).format(new Date(dateString));
+  }
 
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(search.toLowerCase()),
@@ -106,7 +113,9 @@ function Hompage() {
 
         <div className="flex item-center justify-center pt-2">
           <div className="w-md  text-center">
-            {notes.length === 0 ? (
+            {loading ? (
+              <p>Loading...</p>
+            ) : notes.length === 0 ? (
               <div>
                 <div className="flex items-center pt-20 justify-center">
                   <img
@@ -121,7 +130,7 @@ function Hompage() {
               <p>No matching tasks found</p>
             ) : (
               filteredNotes.map((note) => (
-                <div className="w-md text-left">
+                <div key={note.id} className="w-md text-left">
                   <div
                     key={note.id}
                     className="flex justify-between border-b border-[#6c63ff] py-4"
@@ -154,7 +163,7 @@ function Hompage() {
                             <div className="flex  pb-1">{note.title}</div>
                           </span>
                           <p className="text-[10px] text-gray-300 pl-3 pt-1.5">
-                            {note.created_at}
+                            {formatDate(note.created_at)}
                           </p>
                         </div>
 
@@ -176,7 +185,7 @@ function Hompage() {
                         onClick={() => {
                           setEditingNote(note);
                           setInput(note.title);
-                          setDescription(note.description);
+                          setDescription(note.description ?? "");
                           setOpen(true);
                         }}
                       />
@@ -188,6 +197,7 @@ function Hompage() {
             )}
           </div>
         </div>
+
         <div className="fixed bottom-10 right-20">
           <FaCirclePlus
             size={40}

@@ -9,13 +9,14 @@ function getHeaders() {
     Authorization: `Token ${token}`,
 }}
 
-export async function getTasks(): Promise<Task[]> {
+
+export async function getTasks(): Promise<{ message: string; tasks: Task[] }> {
   const response = await fetch(`${BASE_URL}tasks/`, {
     headers: getHeaders(),
   });
   if (!response.ok) throw new Error("Failed to fetch tasks");
   const data = await response.json();
-  return Array.isArray(data) ? data : data.results ?? [];
+  return data
 }
 
 export async function createTask(payload: TaskPayload): Promise<Task>{

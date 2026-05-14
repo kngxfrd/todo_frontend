@@ -23,14 +23,13 @@ export interface AuthResponse {
 export interface Task {
   id: number;
   title: string;
-  description: string;
+  description: string | null;
   completed: boolean;
-  created_at: number;
+  created_at: string;
 }
 
 export interface TaskPayload {
   title: string;
   description: string;
   completed?: boolean;
-  created_at: number;
 }
