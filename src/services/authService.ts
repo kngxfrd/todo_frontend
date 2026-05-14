@@ -1,6 +1,6 @@
 import type { RegisterPayload, LoginPayload, AuthResponse } from "./auth"
 
-const BASE_URL = "https://todo-api-ztc2.onrender.com/api/"
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 async function safeJson(response: Response) {
   const text = await response.text();
