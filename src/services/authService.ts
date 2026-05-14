@@ -33,7 +33,6 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   const refresh = data?.refresh || data?.tokens?.refresh;
 
   if (token) {
-    localStorage.clear();
     localStorage.setItem("token", token);
     if (refresh) localStorage.setItem("refresh", refresh);
     console.log("Saved token:", localStorage.getItem("token"));  
@@ -72,7 +71,6 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   const refresh = data?.tokens?.refresh || data?.refresh;
 
   if (token) {
-    localStorage.clear();
     localStorage.setItem("token", token);
     if (refresh) localStorage.setItem("refresh", refresh);
     console.log("Saved token:", localStorage.getItem("token"));  // 👈 verify
