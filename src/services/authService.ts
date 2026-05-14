@@ -27,7 +27,11 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
     throw new Error("Registration failed");
   }
 
-  return safeJson(response);
+   const data: AuthResponse = await safeJson(response);  
+  localStorage.setItem("token", data.tokens.access);
+  return data;
+
+  
 }
 
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
