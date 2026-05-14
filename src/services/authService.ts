@@ -30,6 +30,7 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
    const data = await safeJson(response);
   console.log("Register response:", data);  
   if (data?.access) {
+    localStorage.clear();
     localStorage.setItem("token", data.access);
     localStorage.setItem("refresh", data.refresh);
   }
@@ -61,6 +62,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
 
   
   const data: AuthResponse = await safeJson(response);  
+  localStorage.clear();
   localStorage.setItem("token", data.token);
   return data;
 }
