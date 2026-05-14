@@ -61,6 +61,6 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
 
   
   const data: AuthResponse = await safeJson(response);  
-  localStorage.setItem("token", data.tokens.access);
+  localStorage.setItem("token", data.token);
   return data;
 }
