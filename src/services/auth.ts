@@ -11,14 +11,18 @@ export interface LoginPayload {
  password: string;
 }
 
-export interface AuthResponse {
- token: string;
- user: {
- id: number;
- name: string;
- email: string;
- };
-}
+export type AuthResponse = {
+  message: string;
+  user: {
+    name: string;
+    username: string;
+    email: string;
+  };
+  tokens: {
+    refresh: string;
+    access: string;  
+  };
+};
 
 export interface Task {
   id: number;

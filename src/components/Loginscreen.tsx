@@ -24,7 +24,7 @@ function Loginscreen() {
 
     try {
       const data = await loginUser(form);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.tokens.access);
       setSuccessMessage(` Welcome, ${data.user?.name ?? "there"}`);
       setTimeout(() => navigate("/home"), 500);
       console.log("Registered:", data);

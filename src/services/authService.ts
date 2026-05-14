@@ -45,6 +45,6 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   }
 
   const data: AuthResponse = await safeJson(response);  // 👈 and here
-  localStorage.setItem("token", data.token);
+  localStorage.setItem("token", data.tokens.access);
   return data;
 }
