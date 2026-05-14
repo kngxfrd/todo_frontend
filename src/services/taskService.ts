@@ -1,4 +1,5 @@
 import type{ Task, TaskPayload } from "./auth"
+import { refreshToken } from "./authService";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -14,9 +15,20 @@ async function safeJson(response: Response) {
 }
 
 export async function getTasks(): Promise<{ message: string; tasks: Task[] }> {
-  const response = await fetch(`${BASE_URL}tasks/`, {
+  let response = await fetch(`${BASE_URL}tasks/`, {
     headers: getHeaders(),
   });
+
+  if (response.status === 401) {
+    try {
+      await refreshToken();  // 👈 get new token
+      response = await fetch(`${BASE_URL}tasks/`, { headers: getHeaders() }); // 👈 retry
+    } catch {
+      localStorage.clear();
+      window.location.href = "/";  // 👈 redirect to login if refresh fails
+      return { message: "", tasks: [] };
+    }
+  }
   if (!response.ok) {
     const error = await safeJson(response); 
     throw new Error(error.message || "failed to fetch tasks");

@@ -44,6 +44,22 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   return data;
 }
 
+export async function refreshToken(): Promise<void> {
+  const refresh = localStorage.getItem("refresh");
+  if (!refresh) throw new Error("No refresh token");
+
+  const response = await fetch(`${BASE_URL}auth/token/refresh/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ refresh }),
+  });
+
+  const data = await safeJson(response);
+  if (!response.ok) throw new Error("Refresh failed");
+
+  localStorage.setItem("token", data.access);  // 👈 save new access token
+}
+
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   const response = await fetch(`${BASE_URL}auth/login/`, {
     method: "POST",
