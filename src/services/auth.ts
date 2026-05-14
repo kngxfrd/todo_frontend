@@ -20,7 +20,7 @@ export type AuthResponse = {
   };
   tokens: {
     refresh: string;
-    access: string;  
+    access: string;
   };
 };
 

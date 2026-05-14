@@ -17,11 +17,11 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   });
 
   if (!response.ok) {
-    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    const error = await safeJson(response);
     throw new Error(error.message || "Registration failed");
   }
 
-  return safeJson(response);  // 👈 here too
+  return safeJson(response); 
 }
 
 export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
@@ -34,7 +34,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   });
 
   if (!response.ok) {
-    const error = await safeJson(response);  // 👈 here too
+    const error = await safeJson(response);
 
     if (error.detail) throw new Error(error.detail);
 
@@ -44,7 +44,8 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     throw new Error("Login failed");
   }
 
-  const data: AuthResponse = await safeJson(response);  // 👈 and here
-  localStorage.setItem("token", data.tokens.access);
+  const data: AuthResponse = await safeJson(response);
+ localStorage.setItem("token", data.tokens.access);  // 👈 this should work now
+  localStorage.setItem("user", JSON.stringify(data.user)); 
   return data;
 }
