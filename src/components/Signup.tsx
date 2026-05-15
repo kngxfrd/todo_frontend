@@ -27,11 +27,11 @@ function Signup() {
 
     try {
       const data = await registerUser(form);
-      localStorage.setItem("token", data.token);
+
       setSuccessMessage(
         `Account created! Welcome, ${data.user?.name ?? "there"}`,
       );
-      setTimeout(() => navigate("/home"), 2500);
+      setTimeout(() => navigate("/"), 2500);
       console.log("Registered:", data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

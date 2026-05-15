@@ -33,7 +33,7 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthRespon
   const refresh = data?.refresh || data?.tokens?.refresh;
 
   if (token) {
-    localStorage.setItem("token", token);
+
     if (refresh) localStorage.setItem("refresh", refresh);
     console.log("Saved token:", localStorage.getItem("token"));  
   } else {
@@ -63,11 +63,12 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
     throw new Error("Login failed");
   }
 
+
   
    const data = await safeJson(response);
   console.log("Login response:", JSON.stringify(data));  // 👈 full log
 
-  const token = data?.tokens?.access || data?.access || data?.token;
+  const token = data?.tokens?.access;
   const refresh = data?.tokens?.refresh || data?.refresh;
 
   if (token) {
