@@ -33,11 +33,11 @@ export async function createTask(payload: TaskPayload): Promise<Task>{
     body: JSON.stringify(payload)
   })
   if (!response.ok) {
-    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    const error = await safeJson(response);
     throw new Error(error.message || "failed to create tasks");
   }
 
-  return safeJson(response);  // 👈 here too 
+  return safeJson(response); 
 
 }
 
@@ -48,11 +48,11 @@ export async function updateTask(id: number, payload: Partial<TaskPayload>): Pro
     body: JSON.stringify(payload),
   });
   if (!response.ok) {
-    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    const error = await safeJson(response);  
     throw new Error(error.message || "failed to update tasks");
   }
 
-  return safeJson(response);  // 👈 here too
+  return safeJson(response);  
 }
 
 export async function deleteTask(id: number): Promise<void> {
@@ -61,9 +61,9 @@ export async function deleteTask(id: number): Promise<void> {
     headers: getHeaders(),
   });
 if (!response.ok) {
-    const error = await safeJson(response);  // 👈 safeJson instead of response.json()
+    const error = await safeJson(response);  
     throw new Error(error.message || "failed to delete tasks");
   }
 
-  return safeJson(response);  // 👈 here too
+  return safeJson(response); 
 }

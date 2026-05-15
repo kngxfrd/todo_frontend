@@ -66,7 +66,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
 
   
    const data = await safeJson(response);
-  console.log("Login response:", JSON.stringify(data));  // 👈 full log
+  console.log("Login response:", JSON.stringify(data)); 
 
   const token = data?.tokens?.access;
   const refresh = data?.tokens?.refresh || data?.refresh;
@@ -74,7 +74,7 @@ export async function loginUser(payload: LoginPayload): Promise<AuthResponse> {
   if (token) {
     localStorage.setItem("token", token);
     if (refresh) localStorage.setItem("refresh", refresh);
-    console.log("Saved token:", localStorage.getItem("token"));  // 👈 verify
+    console.log("Saved token:", localStorage.getItem("token"));  
   }
 
   return data;

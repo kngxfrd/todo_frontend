@@ -27,6 +27,8 @@ function Hompage() {
   const [search, setSearch] = useState("");
   const [editingNote, setEditingNote] = useState<Task | null>(null);
 
+
+  
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -80,9 +82,13 @@ function Hompage() {
     }).format(new Date(dateString));
   }
 
-  const filteredNotes = notes.filter((note) =>
-    note.title.toLowerCase().includes(search.toLowerCase()),
-  );
+ const filteredNotes = notes
+  .filter((note) => note.title.toLowerCase().includes(search.toLowerCase()))
+  .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  ;
+
+
+
   return (
     <>
       <div className="">
