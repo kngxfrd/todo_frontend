@@ -31,7 +31,7 @@ function Signup() {
       setSuccessMessage(
         `Account created! Welcome, ${data.user?.name ?? "there"}`,
       );
-      setTimeout(() => navigate("/"), 2500);
+      setTimeout(() => navigate("/home"), 2500);
       console.log("Registered:", data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
